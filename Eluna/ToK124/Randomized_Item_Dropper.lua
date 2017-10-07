@@ -10,7 +10,7 @@ local command = "#roll"; -- command used
 local roll_item_ID = 8000001; -- id of the roll item
 local ItemName = GetItemLink(roll_item_ID);
 local cost = 1;
-local remove_roll_item_delay = 300;
+local remove_roll_item_delay = 100;
 
 local Item_Drops = { -- {chance_Value {item_id_1, item_id_2, item_id_3, item_id_4, item_id_5....}},
 		[1] = {60,{6400020, 6400021}}, -- green 60% deop rate.
