@@ -57,7 +57,7 @@ local function ItemRoll(event, player, msg, Type, lang)
 				
 					local item = math.random(1, #Item_Drops[chance][2]);
 					
-						if(player:AddItem(Item_Drops[chance][2][item], 1)==true)then
+						if(player:AddItem(Item_Drops[chance][2][item], 1))then
 			
 							player:RegisterEvent(RemoveItemRollItem, remove_roll_item_delay, 1, player);
 						end
