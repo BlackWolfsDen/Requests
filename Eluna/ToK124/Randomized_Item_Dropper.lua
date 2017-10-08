@@ -14,9 +14,10 @@ local tries = 3; -- catch 22 in case player can only have 1 item they allready h
 local try = 1;
 
 local Item_Drops = { -- {chance_Value {item_id_1, item_id_2, item_id_3, item_id_4, item_id_5....}},
-		[1] = {10,{6400016, 6400019}}; -- purple 10% drop chance.
-		[2] = {50,{800000, 800001}}; -- blue 30% drop chance.
-		[3] = {100,{6400020, 6400021}}, -- green 60% deop rate. DO NOT EXCEED 100%.
+		[1] = {10,{6400016, 6400019}}; -- 10 or less roll.
+		[2] = {50,{800000, 800001}}; -- 50 or less roll.
+		[3] = {100,{6400020, 6400021}}, -- 100 or less roll.
+		[4] = {200,{6400022, 6400023}}, -- 200 or less roll.
 	};
 
 local time = tonumber(os.time());
@@ -32,7 +33,7 @@ local function ItemRoll(event, player, msg, Type, lang)
 
 		else
 		
-			local roll = math.random(1, 100);
+			local roll = math.random(1, Item_Drops[#Item_Drops][1]);
 			local chance = nil;
 			local comp = 0;
 			
