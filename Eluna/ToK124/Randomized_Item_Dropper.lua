@@ -14,9 +14,9 @@ local tries = 3; -- catch 22 in case player can only have 1 item they allready h
 local try = 1;
 
 local Item_Drops = { -- {chance_Value {item_id_1, item_id_2, item_id_3, item_id_4, item_id_5....}},
-		[1] = {60,{6400020, 6400021}}, -- green 60% deop rate.
+		[1] = {10,{6400016, 6400019}}; -- purple 10% drop chance.
 		[2] = {30,{800000, 800001}}; -- blue 30% drop chance.
-		[3] = {10,{6400016, 6400019}}; -- purple 10% drop chance.
+		[3] = {60,{6400020, 6400021}}, -- green 60% deop rate.
 	};
 
 local time = tonumber(os.time());
