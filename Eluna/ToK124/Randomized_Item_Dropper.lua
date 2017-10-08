@@ -1,4 +1,4 @@
--- © random item giver script  -- © 
+-- © random item giver script  -- ©
 -- © this will allow an item to be clicked and reward the clicker some random item  -- ©
 -- © the click item will be removed after the reward. -- ©
 -- © Eluna script. -- ©
