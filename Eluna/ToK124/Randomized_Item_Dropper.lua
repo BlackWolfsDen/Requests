@@ -47,7 +47,6 @@ local function ItemRoll(event, player, msg, Type, lang)
 				else
 			
 					local item = math.random(1, #Item_Drops[chance][2]);
-					local item_link = GetItemLink(Item_Drops[chance][2][item]);
 					
 						if(player:AddItem(Item_Drops[chance][2][item], 1))then player:RemoveItem(roll_item_ID, cost);
 							
