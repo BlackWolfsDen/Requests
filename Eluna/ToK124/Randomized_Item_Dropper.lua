@@ -25,8 +25,10 @@ math.randomseed(time*time);
 local function ItemRoll(event, player, msg, Type, lang)
 
 	if(msg == command)then
-
-		if(player:HasItem(roll_item_ID, cost) == false)then	player:SendBroadcastMessage("You need "..cost.." of "..ItemName..".");
+	
+		local count = player:GetItemCount(roll_item_ID);
+		
+		if(player:HasItem(roll_item_ID, cost) == false)then	player:SendBroadcastMessage("You need "..cost.." of "..ItemName..". You have "..count..".");
 
 		else
 		
