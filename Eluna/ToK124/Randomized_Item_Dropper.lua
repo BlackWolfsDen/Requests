@@ -13,7 +13,7 @@ local cost = 1; -- cost of item per roll.
 local tries = 3; -- catch 22 in case player can only have 1 item they allready have then reroll x tries for a new item.
 local try = 1;
 
-local Item_Drops = { -- {chance_Value {item_id_1, item_id_2, item_id_3, item_id_4, item_id_5....}},
+local Item_Drops = { -- {Roll_Value_Required {item_id_1, item_id_2, item_id_3, item_id_4, item_id_5....}},
 		[1] = {10,{6400016, 6400019}}; -- 10 or less roll.
 		[2] = {50,{800000, 800001}}; -- 50 or less roll.
 		[3] = {100,{6400020, 6400021}}, -- 100 or less roll.
