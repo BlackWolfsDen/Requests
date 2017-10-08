@@ -7,10 +7,11 @@
 -- © For Tok124 of EmuDevs.com -- ©
 
 local command = "#roll"; -- command used
-local roll_item_ID = 8000001; -- id of the roll item
-local ItemName = GetItemLink(roll_item_ID);
-local cost = 1;
-local remove_roll_item_delay = 100;
+local roll_item_ID = 8000001; -- id of the roll item.
+local ItemName = GetItemLink(roll_item_ID); -- ingame item link.
+local cost = 1; -- cost of item per roll.
+local tries = 3; -- catch 22 in case player can only have 1 item they allready have then reroll x tries for a new item.
+local try = 1;
 
 local Item_Drops = { -- {chance_Value {item_id_1, item_id_2, item_id_3, item_id_4, item_id_5....}},
 		[1] = {60,{6400020, 6400021}}, -- green 60% deop rate.
@@ -21,20 +22,13 @@ local Item_Drops = { -- {chance_Value {item_id_1, item_id_2, item_id_3, item_id_
 local time = tonumber(os.time());
 math.randomseed(time*time);
 
-local function RemoveItemRollItem(event, _, _, player)
-
-	player:RemoveItem(roll_item_ID, cost)
-end
-
 local function ItemRoll(event, player, msg, Type, lang)
 
 	if(msg == command)then
 
-		if(player:HasItem(roll_item_ID, cost) == false)then
-			player:SendBroadcastMessage("You need "..cost.." of "..ItemName..".");
-		end
+		if(player:HasItem(roll_item_ID, cost) == false)then	player:SendBroadcastMessage("You need "..cost.." of "..ItemName..".");
 
-		if(player:HasItem(roll_item_ID, cost))then
+		else
 		
 			local roll = math.random(1, 100);
 			local chance = nil;
@@ -48,21 +42,25 @@ local function ItemRoll(event, player, msg, Type, lang)
 					end
 				end
 
-				if(chance == nil)then
-				
-					 ItemRoll(event, player, msg, Type, lang);
-				end
+				if(chance == nil)then ItemRoll(event, player, msg, Type, lang);
+
+				else
 			
-				if(chance)then
-				
 					local item = math.random(1, #Item_Drops[chance][2]);
+					local item_link = GetItemLink(Item_Drops[chance][2][item]);
 					
-						if(player:AddItem(Item_Drops[chance][2][item], 1))then
-			
-							player:RegisterEvent(RemoveItemRollItem, remove_roll_item_delay, 1, player);
+						if(player:AddItem(Item_Drops[chance][2][item], 1))then player:RemoveItem(roll_item_ID, cost);
+							
+						else 
+							if(try >= tries)then player:SendBroadcastMessage("There was an error trying to gift you an item. please try again later.");
+							
+							else 
+								try = try + 1;
+								ItemRoll(event, player, msg, Type, lang);
+							end
 						end
 				end
-			end
+		end
 	return false;
 	end
 end
